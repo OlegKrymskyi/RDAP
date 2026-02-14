@@ -1,7 +1,7 @@
 ﻿namespace DarkPeakLabs.Rdap
 {
-    using DarkPeakLabs.Rdap.Values;
     using System.Collections.Generic;
+    using DarkPeakLabs.Rdap.Values;
 
     /// <summary>
     /// Class representing entity contact information
@@ -39,6 +39,11 @@
         public IReadOnlyList<string> Address { get; set; }
 
         /// <summary>
+        /// entity organization
+        /// </summary>
+        public IReadOnlyList<string> Organization { get; set; }
+
+        /// <summary>
         /// entity phone numbers
         /// </summary>
         public IReadOnlyList<RdapContactPhoneNumber> PhoneNumbers { get; set; }
@@ -47,5 +52,10 @@
         /// entity email address
         /// </summary>
         public IReadOnlyList<string> Emails { get; set; }
+
+        /// <summary>
+        /// entity organization
+        /// </summary>
+        public IReadOnlyList<string> Urls { get; set; }
     }
 }

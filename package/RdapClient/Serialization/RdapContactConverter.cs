@@ -130,7 +130,7 @@ namespace DarkPeakLabs.Rdap.Serialization
                             else
                             {
                                 context.AddJsonViolationError(propertyJsonNode, $"{property.Values[0]} is not valid kind property value.");
-                                contact.Kind= RdapContactKind.Unknown;
+                                contact.Kind = RdapContactKind.Unknown;
                             }
                         }
                         break;
@@ -208,6 +208,20 @@ namespace DarkPeakLabs.Rdap.Serialization
                             contact.Emails = emails;
                         }
                         break;
+                    case "org":
+                        if (ValidatePropertyType(property, "text", propertyJsonNode, context) &&
+                            ValidateMultipleValues(property, propertyJsonNode, context))
+                        {
+                            contact.Organization = property.Values;
+                        }
+                        break;
+                    case "url":
+                        if (ValidatePropertyType(property, "uri", propertyJsonNode, context) &&
+                            ValidateMultipleValues(property, propertyJsonNode, context))
+                        {
+                            contact.Urls = property.Values;
+                        }
+                        break;
                     // not implemented vCard properties
                     // general properties
                     case "source":
@@ -226,7 +240,6 @@ namespace DarkPeakLabs.Rdap.Serialization
                     // organizational properties
                     case "title":
                     case "role":
-                    case "org":
                     case "logo":
                     case "member":
                     case "related":
@@ -238,7 +251,6 @@ namespace DarkPeakLabs.Rdap.Serialization
                     case "sound":
                     case "uid":
                     case "clientpidmap":
-                    case "url":
                     // security properties
                     case "key":
                     // calendar properties
@@ -340,7 +352,7 @@ namespace DarkPeakLabs.Rdap.Serialization
         {
             propertyParameters = [];
 
-            foreach((string name, JsonNode node) in jsonObject)
+            foreach ((string name, JsonNode node) in jsonObject)
             {
                 string key = name;
                 if (name.Any(x => char.IsUpper(x)))
